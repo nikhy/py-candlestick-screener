@@ -1,19 +1,36 @@
 <html>
+
 <head>
     <style>
-        body { font-family: arial; margin: 20px; }
-        td { padding: 5px; }
-        .bullish { background: green; color: white; }
-        .bearish { background: red; color: white; }
+        body {
+            font-family: arial;
+            margin: 20px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        .bullish {
+            background: green;
+            color: white;
+        }
+
+        .bearish {
+            background: red;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
     <h1>Technical Scanner</h1>
     <form>
         <select name="pattern">
             <option value="">-- Select a Pattern --</option>
             {% for key in candlestick_patterns %}
-                <option value="{{ key }}" {% if pattern == key %}selected="selected"{% endif %}>{{ candlestick_patterns[key] }}</option>
+            <option value="{{ key }}" {% if pattern == key %}selected="selected" {% endif %}>
+                {{ candlestick_patterns[key] }}</option>
             {% endfor %}
         </select>
 
@@ -27,24 +44,28 @@
             <th>signal</th>
         </tr>
         {% for stock in stocks %}
-            {% if stocks[stock][pattern] %}
-            <tr>
-                <td>
-                    {{ stock }}
-                </td>
-                <td>
-                    {{ stocks[stock]['company'] }}
-                </td>
-                <td class="{{ stocks[stock][pattern] }}">
-                    {{ stocks[stock][pattern]}}
-                </td>
-            <tr>
-                <td colspan="3">
-                    <img src="https://finviz.com/chart.ashx?t={{ stock }}&ty=c&ta=1&p=d&s=l" />
-                </td>
-            </tr>
-            {% endif %}
+        {% if stocks[stock][pattern] %}
+        <tr>
+            <td>
+                {{ stock }}
+            </td>
+            <td>
+                {{ stocks[stock]['company'] }}
+            </td>
+            <td class="{{ stocks[stock][pattern] }}">
+                {{ stocks[stock][pattern]}}
+            </td>
+        <tr>
+            <td colspan="3">
+                <img
+                    src="https://www.icharts.in/ShowChart.php?symbol={{stock}}&period=Daily&chart_size=400&log_chart=0&pr_period=3M&uind1=SMA&uind1_param=20&uind2=SMA&uind2_param=50" />
+               
+            </td>
+        </tr>
+
+        {% endif %}
         {% endfor %}
     </table>
 </body>
+
 </html>

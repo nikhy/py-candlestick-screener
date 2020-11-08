@@ -37,7 +37,7 @@ def index():
             symbol = filename.split('.')[0]
 
             try:
-                results = pattern_function(df['Open'], df['High'], df['Low'], df['Close'])
+                results = pattern_function(df['open'], df['high'], df['low'], df['close'])
                 last = results.tail(1).values[0]
 
                 if last > 0:
@@ -48,5 +48,5 @@ def index():
                     stocks[symbol][pattern] = None
             except Exception as e:
                 print('failed on filename: ', filename)
-
+                print(e)
     return render_template('index.html', candlestick_patterns=candlestick_patterns, stocks=stocks, pattern=pattern)
